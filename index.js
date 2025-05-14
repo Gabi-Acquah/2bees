@@ -28,6 +28,7 @@ const requestLogger =(req, res, next)=>{
   next()
 }
 app.use(requestLogger)
+app.use(express.static('dist'))
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
@@ -70,7 +71,7 @@ app.post('/api/notes', (req, res)=>{
 })
 
 app.use(unknownEndpoint)
-const  PORT = 3001
+const  PORT = process.env.PORT || 3001
 app.listen(PORT, ()=>{
     console.log(`server running on port: ${PORT}`)
 })
